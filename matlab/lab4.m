@@ -1,5 +1,3 @@
-
-
 % Read signal
 [signal, Fs] = audioread('Scale_Cmajor_Piano.wav');
 %TODO try out different HopSizes or WindowSizes
@@ -47,8 +45,15 @@ for pitch = 0 : 127
        end
    end 
 end
-pitches = 0:127;
-Ycomp = log(1+1*Y);
-image(T,pitches, Ycomp);
 
+C= zeros(12, n);
 
+for pitch = 0 : 127
+    for time = 1:n
+        C((mod(pitch, 12))+1, time) = C(mod(pitch, 12)+1, time) + Y(pitch+1, time);
+    end
+end
+
+pitches = 0:11;
+%Ycomp = log(1+1*Y);
+image(T,pitches, C);
