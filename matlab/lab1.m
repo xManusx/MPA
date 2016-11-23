@@ -5,7 +5,6 @@
 N = 4096;
 % Step size
 H = 2048;
-H = N/16
 % Hann-window
 w = hann(N);
 
@@ -22,12 +21,12 @@ T = T*H/Fs;
 F = [0:m-1];
 F = F*Fs/N;
 
-logY = 10*log10(Y)
+logY = 10*log10(Y);
 %spectrogram(signal, w, N-H, m, Fs, 'yaxis')
 axis([T(1) T(end) F(1) F(end)]);
 image(T, F, logY);
 set(gca, 'Ydir', 'normal');
-colorbar
+colorbar;
 %xlim([0,1])
 
 
