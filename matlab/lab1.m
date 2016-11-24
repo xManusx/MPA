@@ -1,6 +1,6 @@
 % Read signal
 [signal, Fs] = audioread('Sound_TwoSineTwoImpulse.wav');
-%TODO try out different HopSizes or WindowSizes
+
 % Window size
 N = 4096;
 % Step size
@@ -9,7 +9,8 @@ H = 2048;
 w = hann(N);
 
 % Compute complex spectrogram
-S = spectrogram(signal, w, N -H);
+S = spectrogram(signal, w, N - H);
+
 % Take abs and square of each element
 Y = abs(S).^2;
 
@@ -21,14 +22,29 @@ T = T*H/Fs;
 F = [0:m-1];
 F = F*Fs/N;
 
-logY = 10*log10(Y);
-%spectrogram(signal, w, N-H, m, Fs, 'yaxis')
-axis([T(1) T(end) F(1) F(end)]);
-image(T, F, logY);
-set(gca, 'Ydir', 'normal');
+% plots
+
+% axis = indices
+h = subplot(1, 3, 1);
+x = [0:n-1];
+y = [0:m-1];
+image(x, y, Y, 'Parent', h);
+set(h, 'Ydir', 'normal');
+title('Indices as axis');
 colorbar;
-%xlim([0,1])
 
+% axis = freq and time
+h = subplot(1, 3, 2);
+image(T, F, Y, 'Parent', h);
+set(h, 'Ydir', 'normal');
+title('Time and Frequencies as axis');
+colorbar;
 
-%imagesc(T, F, S);
+% log decibel-scale
+h = subplot(1, 3, 3);
+Ylog = 10*log10(Y);
+image(T, F, Ylog, 'Parent', h);
+set(h, 'Ydir', 'normal');
+title('Logarithmic decibel-scale');
+colorbar;
 
