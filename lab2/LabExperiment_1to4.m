@@ -52,7 +52,7 @@ V = medianFilter(Y,11,'p');
 
 % filter length 11
 M_h = double(H >= V);
-M_p = double(V >= H);
+M_p = double(V > H);
 
 X_h = M_h.*X;
 X_p = M_p.*X;

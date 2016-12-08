@@ -29,7 +29,7 @@ F = F*Fs/N;
 Y = zeros(128, n);
 
 for pitch = 0 : 127
-   % compute min and max pitch of P(pitch)
+   % compute min and max freq of P(pitch)
    pmin = P(pitch-0.5);
    pmax = P(pitch+0.5);
    
